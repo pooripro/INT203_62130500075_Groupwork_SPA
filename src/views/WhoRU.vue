@@ -51,7 +51,7 @@ export default {
                         'content-type': 'application/json'
                     },
                 })
-                const data = await res.json();
+                const data = await res.json()
                 let isExist = false
                 data.forEach(element => {
                     if(element.name === user.name){
