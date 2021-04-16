@@ -6,7 +6,9 @@
                 </div>
                 <div class="pt-4">
                     <form @submit.prevent="submitForm">
-                    <input class="rounded-full py-2 px-6" type="text">             
+                    <input v-model="enteredName" class="rounded-full py-2 px-6" type="text">            
+                    <input type="submit" style="position: absolute; left: -9999px"/>
+                    <p v-if="invalidNameInput" class="font-chewy text-base text-camel"> Please enter your name! </p>
                     </form>
                 </div>
             </div>
@@ -18,12 +20,13 @@ export default {
     data(){
      return {
          enteredName: '',
-         invalideInputName: false
+         invalidNameInput: false
      }
  },
     methods:{
         submitForm(){
-            this.invalideInputName = this.enteredName === '' ? true : false
+            this.invalidNameInput = this.enteredName === '' ? true : false
+            console.log(this.enteredName)
             if(this.enteredName !== ''){
                 this.addNewUser({
                     name: this.enteredName
@@ -33,7 +36,7 @@ export default {
 
         async addNewUser(users) {
         try {
-            const res = await fetch(this.url, {
+            await fetch(`http://localhost:5000/Users`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -42,8 +45,6 @@ export default {
                 name: users.name
                 })
             })
-            // const data = await res.json()
-            // this.surveyResults = [...this.surveyResults, data]
         } catch (error) {
             console.log(`Could not save! ${error}`)
         }
