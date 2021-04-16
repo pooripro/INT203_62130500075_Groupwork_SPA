@@ -8,5 +8,17 @@
       "name": "Puwa",
       "id": 2
     }
+  ],
+  "List": [
+    {
+      "owner": "Puwa",
+      "list": "REad bokbok",
+      "id": 4
+    },
+    {
+      "owner": "Puwa",
+      "list": "going to school",
+      "id": 5
+    }
   ]
 }

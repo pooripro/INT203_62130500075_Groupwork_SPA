@@ -1,12 +1,12 @@
 <template>
-    <div class="bg-brownycolors w-screen h-screen" >
+    <div class="bg-brownycolors w-screen h-screen">
             <div class="filter drop-shadow-xl">
                 <div class="pt-72">
                     <p class="font-chewy text-5xl text-cosmiclatte " >Who are you?</p>
                 </div>
                 <div class="pt-4">
                     <form @submit.prevent="submitForm">
-                    <input v-model="enteredName" class="rounded-full py-2 px-6" type="text">            
+                    <input v-model="enteredName" class="rounded-full py-2 px-6 font-chewy" type="text">            
                     <input type="submit" style="position: absolute; left: -9999px"/>
                     <p v-if="invalidNameInput" class="font-chewy text-base text-camel"> Please enter your name! </p>
                     </form>
@@ -28,9 +28,11 @@ export default {
         async submitForm(){
             this.invalidNameInput = this.enteredName === '' ? true : false
             console.log(`Entered Users: ${this.enteredName}`)
+            
             if(this.enteredName !== ''){
                 const user = {
                     name: this.enteredName
+
                 }
                 const isExist = await this.checkUserExist(user)
                 if(!isExist){
