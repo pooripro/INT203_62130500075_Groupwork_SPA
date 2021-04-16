@@ -37,6 +37,7 @@ export default {
                 const isExist = await this.checkUserExist(user)
                 if(!isExist){
                      this.addNewUser(user)
+                     this.$router.push(`/Home/${this.enteredName}/${this.userId}`)
                 }else{
                     // alert('user already exist')
                     this.$router.push(`/Home/${this.enteredName}/${this.userId}`)

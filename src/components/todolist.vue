@@ -16,10 +16,19 @@
     <!-- existtodolist -->
     <div>
       <div class="pt-10 px-96">
-        <p v-for="item in listTodo" :key="item.id" 
-        class="rounded-full py-2 px-6 bg-white mt-4"> 
-          {{ item.list }}</p>
-          
+        <ul>
+          <li v-for="item in listTodo" :key="item.id">
+          <!-- <div class="rounded-full py-2 px-6 bg-white mt-4"> -->
+              <div class="">
+                <input type="checkbox" class="form-checkbox h-6 w-6">
+                {{ item.list }}
+                  <button class="inline-block px-8 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2"
+                                @click="deleteTodo(item.id)">
+                                Delete
+                </button>
+              </div> 
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -56,6 +65,7 @@ export default {
               list: this.enteredTodo
             }
             this.addTodo(todo)
+            location.reload();
         }
       },
 
@@ -95,6 +105,13 @@ export default {
           } catch (error) {
             console.log(error);
         }
+      },
+      
+      async deleteTodo(id) {
+            await fetch(`http://localhost:5000/List/${id}`, {
+                method: 'DELETE'
+            })
+            location.reload();  
       }
   },
 

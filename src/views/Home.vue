@@ -1,7 +1,6 @@
 <template>
   <div class="bg-cosmiclatte w-screen h-screen">
-    <nav-bar>
-    </nav-bar>
+
     <todolist>
     </todolist>
   </div>

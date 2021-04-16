@@ -7,33 +7,30 @@
     {
       "name": "Puwa",
       "id": 2
+    },
+    {
+      "name": "Earth",
+      "id": 3
+    },
+    {
+      "name": "Rew",
+      "id": 4
+    },
+    {
+      "name": "Opal",
+      "id": 5
     }
   ],
   "List": [
     {
+      "owner": "Earth",
+      "list": "buy a cat",
+      "id": 3
+    },
+    {
       "owner": "Puwa",
-      "list": "REad bokbok",
+      "list": "Buy a Macbook Pro M1",
       "id": 4
-    },
-    {
-      "owner": "Puwa",
-      "list": "going to school",
-      "id": 5
-    },
-    {
-      "owner": "Puwa",
-      "list": "Buy a car",
-      "id": 6
-    },
-    {
-      "owner": "Puwa",
-      "list": "Buy a car",
-      "id": 7
-    },
-    {
-      "owner": "Puwa",
-      "list": "Buy a cat",
-      "id": 8
     }
   ]
 }

@@ -1,8 +1,7 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">WhoRU</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
+    <nav-bar v-if="$route.name === 'Home' || $route.name === 'About'" :home="`/Home/${$route.params.name}/${$route.params.id}`" 
+    :about="`/About/${$route.params.name}/${$route.params.id}`">
+    </nav-bar>
   <router-view/>
 </template>
 
