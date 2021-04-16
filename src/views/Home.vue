@@ -6,5 +6,11 @@
 </template>
 
 <script>
-
+export default {
+  mounted(){
+    console.log(this.$route);
+    console.log(`name: `, this.$route.params.name)
+    console.log(`id: `, this.$route.params.id)
+  }
+}
 </script>

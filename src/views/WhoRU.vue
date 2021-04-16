@@ -20,17 +20,48 @@ export default {
     data(){
      return {
          enteredName: '',
-         invalidNameInput: false
+         invalidNameInput: false,
+         userId: 0
      }
  },
     methods:{
-        submitForm(){
+        async submitForm(){
             this.invalidNameInput = this.enteredName === '' ? true : false
-            console.log(this.enteredName)
+            console.log(`Entered Users: ${this.enteredName}`)
             if(this.enteredName !== ''){
-                this.addNewUser({
+                const user = {
                     name: this.enteredName
+                }
+                const isExist = await this.checkUserExist(user)
+                if(!isExist){
+                     this.addNewUser(user)
+                }else{
+                    // alert('user already exist')
+                    this.$router.push(`/Home/${this.enteredName}/${this.userId}`)
+                }
+            }
+        },
+        async checkUserExist(user) {
+            try {
+                const res = await fetch(`http://localhost:5000/Users`, {
+                    methods: 'GET',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
                 })
+                const data = await res.json();
+                let isExist = false
+                data.forEach(element => {
+                    if(element.name === user.name){
+                        isExist = true
+                        this.userId = element.id 
+                    }
+                });
+                console.log(isExist)
+                return isExist
+
+            } catch (error) {
+                console.log(error)
             }
         },
 
