@@ -29,7 +29,7 @@
               <div>
                 <input type="checkbox" class="form-checkbox h-6 w-6" />
               </div>
-              <div class="pl-2">
+              <div class="pt-2 pl-2">
                 {{ item.list }}
               </div>
               <div class="pl-2">
@@ -51,11 +51,20 @@
             </div>
           </li>
         </ul>
-        <div v-if="isEditing">
-          <form @submit.prevent="submitEdit">
-            <input v-model="editInputTodo" class="rounded-full py-2 px-6 font-chewy" type="text">
-            <input type="submit" style="position: absolute; left: -9999px"/>
-          </form>
+        <div v-if="isEditing" class="flex flex-row justify-center pt-4">
+          <div class="pt-2">
+            <p>Edit</p>
+          </div>
+          <div class="pl-4">
+            <form @submit.prevent="submitEdit">
+              <input
+                v-model="editInputTodo"
+                class="rounded-full py-2 px-6 font-chewy"
+                type="text"
+              />
+              <input type="submit" style="position: absolute; left: -9999px" />
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -73,11 +82,11 @@ export default {
       invalidTodoInput: false,
       listTodo: [],
       isEditing: false,
-      editInputTodo: '',
+      editInputTodo: "",
       editingTodo: {
         id: Number,
-        list: String
-      }
+        list: String,
+      },
     };
   },
   methods: {
@@ -120,7 +129,7 @@ export default {
               "content-type": "application/json",
             },
           }
-        )
+        );
         const data = await res.json();
         data.forEach((element) => {
           this.listTodo.push({
@@ -136,34 +145,44 @@ export default {
     },
 
     async startEditing(id, todo) {
-      this.isEditing = true
-      this.editingTodo['id'] = id
-      this.editingTodo['list'] = todo
+      if(this.isEditing){
+        this.isEditing = false
+      } else {
+         this.isEditing = true  
+      }
+      this.editingTodo["id"] = id;
+      this.editingTodo["list"] = todo;
 
-      console.log(`startEditing id: ${id}`);
-      console.log(`startEditing list: ${todo}`);
+      // console.log(`startEditing id: ${id}`);
+      // console.log(`startEditing list: ${todo}`);
     },
 
     async submitEdit() {
-      const res = await fetch(`http://localhost:5000/List/${this.editingTodo.id}`, {
-        method: "PUT",
-        headers: {
-					'Content-type': 'application/json'
-				},
-				body: JSON.stringify({
-          owner: this.$route.params.name,
-					list: this.editInputTodo
-				})
-      })
-      const data = await res.json()
+      const res = await fetch(
+        `http://localhost:5000/List/${this.editingTodo.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            owner: this.$route.params.name,
+            list: this.editInputTodo,
+          }),
+        }
+      );
+      const data = await res.json();
       this.listTodo = this.listTodo.map((element) =>
-          element.id === data.id ? {
-            ...element,
-            owner: data.owner,
-            list: data.list
-          }: element
-      )
-        this.isEditing = false
+        element.id === data.id
+          ? {
+              ...element,
+              owner: data.owner,
+              list: data.list,
+            }
+          : element
+      );
+      this.isEditing = false;
+      this.editInputTodo = "";
     },
 
     async deleteTodo(id) {

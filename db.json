@@ -24,18 +24,18 @@
   "List": [
     {
       "owner": "Earth",
-      "list": "buy a cat",
+      "list": "buy a dog",
       "id": 3
     },
     {
       "owner": "Puwa",
-      "list": "Assignment BA",
+      "list": "Assignment A",
       "id": 4
     },
     {
       "owner": "Puwa",
-      "list": "Assignemnt123",
-      "id": 6
+      "list": "Assignment B",
+      "id": 5
     }
   ]
 }
